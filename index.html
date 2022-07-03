@@ -2,24 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Is Nerando Done Yet?</title>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Is Nerando Done Yet? - 2024 Progress Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="app.css">
 </head>
-<body class="flex min-h-screen justify-center items-center flex-col bg-gradient-to-b via-green-200 to-blue-300 from-yellow-200">
+<body class="flex min-h-screen justify-center items-center flex-col bg-gradient-to-b from-yellow-200 via-green-200 to-blue-300">
+    <main class="w-full max-w-7xl mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-4">Is Nerando Done Yet?</h1>
+        <div id="total-progress" class="text-6xl font-bold text-center mb-12"></div>
 
-<h1 class="text-3xl">Is Nerando Done Yet?</h1>
-<h2 class="text-5xl font-bold">4.76%</h2>
-<div class="mt-10 text-2xl text-center">
-    <h2 class="text-3xl">Stuff to do for 2022</h2>
-    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <li class="p-20 text-center shadow-lg rounded-xl bg-white"><div class="text-4xl font-bold">1/7</div> Talks</li>
-        <li class="p-20 text-center shadow-lg rounded-xl bg-white"><div class="text-4xl font-bold">0/7</div> Completed<br/>Projects</li>
-        <li class="p-20 text-center shadow-lg rounded-xl bg-white"><div class="text-4xl font-bold">0/7</div> Articles</li>
-    </ul>
-    <p> Progress Update ( April 1,2022) : Created a list of talks on <a href="https://sessionize.com/Nerajno" target="_blank" rel="noopener noreferrer">Sessionize.</a></p>
-    <p> Progress Update ( April 28, 2022) : Talk accepted to <a href="https://www.magnoliajs.com/" target="_blank" rel="noopener noreferrer">Magnoliajs</a> </p>
-</div>
+        <section class="mb-16">
+            <h2 class="text-3xl font-semibold text-center mb-8">2024 Goals Progress</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="progress-card bg-white rounded-2xl shadow-xl p-8 text-center" data-category="talks">
+                    <h3 class="text-2xl font-semibold mb-4">Talks</h3>
+                    <div class="text-4xl font-bold">
+                        <span id="talks-completed">0</span>/<span id="talks-total">0</span>
+                    </div>
+                </div>
+                <div class="progress-card bg-white rounded-2xl shadow-xl p-8 text-center" data-category="projects">
+                    <h3 class="text-2xl font-semibold mb-4">Projects</h3>
+                    <div class="text-4xl font-bold">
+                        <span id="projects-completed">0</span>/<span id="projects-total">0</span>
+                    </div>
+                </div>
+                <div class="progress-card bg-white rounded-2xl shadow-xl p-8 text-center" data-category="articles">
+                    <h3 class="text-2xl font-semibold mb-4">Articles</h3>
+                    <div class="text-4xl font-bold">
+                        <span id="articles-completed">0</span>/<span id="articles-total">0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-semibold text-center mb-8">Recent Updates</h2>
+            <div id="updates-container" class="space-y-4">
+                <!-- Updates will be populated by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
 </body>
 </html>
