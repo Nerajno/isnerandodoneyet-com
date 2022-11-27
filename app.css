@@ -1,4 +1,21 @@
 body {
     color: black;
-    background-image: url(https://images.pexels.com/photos/7108779/pexels-photo-7108779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+    background-image: url(https://tinyurl.com/6jxdpc3s);
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    background-size: cover;
+    background-repeat:no-repeat;
+    -o-background-size: 100%;
+    padding-top: 25px;
+    margin-top: 100px;
+    position: relative;
+    height: 100vh;
+    width: ;
+
+}
+
+section {
+    width: 70vw;
+    margin: auto;
+    
 }
