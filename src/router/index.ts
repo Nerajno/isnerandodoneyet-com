@@ -6,14 +6,23 @@ import { createRouter, createWebHistory, type RouteLocationNormalized } from 'vu
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'About',
+    component: () => import('../views/AboutPage.vue'),
+  },
+  {
+    path: '/current',
+    name: 'CurrentYear',
     component: () => import('../views/HomePage.vue'),
   },
   {
     path: '/archives',
     name: 'Archives',
-    // Lazy-loaded component
-    component: () => import('../views/YearPage.vue'),
+    component: () => import('../views/ArchivesPage.vue'),
+  },
+  {
+    path: '/history',
+    name: 'History',
+    component: () => import('../views/HistoryPage.vue'),
   },
   {
     path: '/year/:year',
