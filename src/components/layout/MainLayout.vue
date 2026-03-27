@@ -32,6 +32,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
+@reference "tailwindcss";
+
 .page-enter-active,
 .page-leave-active {
   transition: opacity 0.3s, transform 0.3s;

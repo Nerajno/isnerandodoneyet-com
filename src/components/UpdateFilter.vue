@@ -24,14 +24,12 @@ const emit = defineEmits<{
   'filter-change': [filters: string[]];
 }>();
 
-// Move the categories to props definition directly
-const props = withDefaults(defineProps<{
-  categories?: string[];
-}>(), {
-  categories: () => [ALL_CATEGORY, 'Talks', 'Projects', 'Articles']
-});
-
 const ALL_CATEGORY = 'All' as const;
+
+// Move the categories to props definition directly
+const { categories = [ALL_CATEGORY, 'Talks', 'Projects', 'Articles'] } = defineProps<{
+  categories?: string[];
+}>();
 const activeFilters = ref<string[]>([ALL_CATEGORY]);
 
 const toggleFilter = (category: string): void => {

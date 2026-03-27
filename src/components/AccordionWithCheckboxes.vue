@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue';
+import { ref, computed } from 'vue';
 
 const props = defineProps<{
     id: string;
@@ -9,8 +9,6 @@ const props = defineProps<{
     getCheckboxState: (id: string) => boolean;
     setCheckboxState: (id: string, value: boolean) => void;
 }>();
-
-type ItemType = any;
 
 const emit = defineEmits(['change']);
 
@@ -47,7 +45,7 @@ const combinedItems = computed(() => {
             :id="`${id}-accordion`">
             <summary
                 class="cursor-pointer px-4 py-2 font-semibold flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-                :aria-controls="`${id}-content`" :aria-expanded="open.toString()" tabindex="0">
+                :aria-controls="`${id}-content`" :aria-expanded="open" tabindex="0">
                 <span>Show {{ title }}</span>
                 <svg :class="['h-4 w-4 ml-2 transition-transform', open ? 'rotate-180' : '']" fill="none"
                     stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -55,12 +53,15 @@ const combinedItems = computed(() => {
                 </svg>
             </summary>
             <div :id="`${id}-content`" class="p-4 space-y-2">
+                <p v-if="items.length === 0" class="text-sm text-gray-400 dark:text-gray-500 italic mb-3">
+                  No {{ title.toLowerCase() }} added yet — placeholders shown below.
+                </p>
                 <label v-for="(item, idx) in combinedItems" :key="item.id || item.idx || idx"
                     class="flex items-center space-x-2 group text-white" :class="item.isDemo ? 'opacity-60' : ''">
                     <input type="checkbox" class="form-checkbox accent-blue-500"
                         :checked="item.isDemo ? false : getCheckboxState((item.id || idx).toString())"
                         :disabled="item.isDemo"
-                        @change="!item.isDemo && setCheckboxState((item.id || idx).toString(), $event.target.checked); emit('change', item, $event.target.checked)"
+                        @change="!item.isDemo && setCheckboxState((item.id || idx).toString(), ($event.target as HTMLInputElement).checked); emit('change', item, ($event.target as HTMLInputElement).checked)"
                         :id="`${id}-checkbox-${item.id || item.idx || idx}`" />
                     <span class="text-white">
                         <template v-if="item.isDemo">

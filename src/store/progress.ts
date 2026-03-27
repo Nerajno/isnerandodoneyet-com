@@ -1,10 +1,27 @@
 import { defineStore } from 'pinia';
-import type { YearlyData, ProgressItem, Update, ProgressData } from '../types';
+import type { YearlyData, ProgressData } from '../types';
 
 // Comprehensive update with all articles from blog and speaking engagements
 const initialYears: YearlyData[] = [
   {
+    year: 2026,
+    items: [
+      { total: 10, completed: 0, title: 'Talks', category: 'Talks' },
+      { total: 10, completed: 0, title: 'Projects', category: 'Projects' },
+      { total: 10, completed: 0, title: 'Articles', category: 'Articles' },
+    ],
+    updates: [],
+  },
+  {
     year: 2025,
+    notes: 'Standout year for speaking — 8 conferences across the southeast, two major GEO articles that resonated widely, and shipped the first versions of both portfolio projects. Projects underperformed against goal but the foundation is solid heading into 2026.',
+    recap: [
+      'Talks: 8/10 — strongest year on the conference circuit yet, from DevNexus to Magnolia Conf',
+      'Articles: 9/10 — GEO series (Explained + Applied) were the breakout pieces of the year',
+      'Projects: 2/10 — DevelopingDvlpr and IsNerandoDoneYet shipped but 8 goals remain unfinished',
+      'Key lesson: shipping beats planning — the two projects that launched started with tight scopes',
+      'Focus for 2026: close the projects gap and maintain the articles momentum',
+    ],
     items: [
       { total: 10, completed: 8, title: 'Talks', category: 'Talks' },
       { total: 10, completed: 2, title: 'Projects', category: 'Projects' },

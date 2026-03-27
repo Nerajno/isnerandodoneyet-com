@@ -1,21 +1,23 @@
-import { createApp } from 'vue';
+import { createApp, computed } from 'vue';
+import { createPinia } from 'pinia';
 import App from './App.vue';
 import router from './router';
+import '@fontsource-variable/inter';
 import './assets/main.css';
-import { createPinia } from 'pinia';
-
-// Category colors for global injection
-const categoryColors = {
-  talks: '#3B82F6', // blue-500
-  projects: '#10B981', // emerald-500
-  articles: '#F59E0B', // amber-500
-};
+import './style.css';
+import { useThemeStore } from './store/theme';
 
 const app = createApp(App);
-
-// Provide global values
-app.provide('categoryColors', categoryColors);
-
-app.use(router);
 app.use(createPinia());
+app.use(router);
+
+const theme = useThemeStore();
+
+// Category colors — reactive to theme, aligned to design tokens
+const categoryColors = computed(() => theme.isDarkMode
+  ? { talks: '#38bdf8', projects: '#4ade80', articles: '#fbbf24' }  // sky-400 / green-400 / amber-400
+  : { talks: '#0284c7', projects: '#16a34a', articles: '#d97706' }  // sky-600 / green-600 / amber-600
+);
+
+app.provide('categoryColors', categoryColors);
 app.mount('#app');

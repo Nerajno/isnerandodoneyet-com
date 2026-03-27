@@ -103,6 +103,8 @@ export interface YearlyData {
   year: number;
   items: ProgressItem[];
   updates: TimelineUpdate[];
+  notes?: string;
+  recap?: string[];
 }
 
 export interface CategoryData {

@@ -9,9 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
     "@tailwindcss/vite": "^4.0.12",
     "pinia": "^3.0.3",
-    "reload": "^3.4.2",
+    "reload": "^3.4.3",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },

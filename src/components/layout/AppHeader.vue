@@ -70,7 +70,7 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown));
         </button>
 
         <!-- Hamburger — mobile only -->
-        <button
+        <!-- <button
           ref="hamburgerRef"
           class="hamburger md:hidden"
           :aria-expanded="mobileOpen"
@@ -81,7 +81,7 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown));
           <span class="bar" :class="{ 'bar--open-1': mobileOpen }"></span>
           <span class="bar" :class="{ 'bar--open-2': mobileOpen }"></span>
           <span class="bar" :class="{ 'bar--open-3': mobileOpen }"></span>
-        </button>
+        </button> -->
       </div>
 
     </div>
@@ -157,7 +157,6 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown));
 
 .nav-link--active {
   @apply text-blue-600 dark:text-blue-400;
-  @apply border-b-2 border-blue-500 dark:border-blue-400;
 }
 
 /* ── Theme toggle ─────────────────────────────────────── */

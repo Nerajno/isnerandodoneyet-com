@@ -3,6 +3,7 @@ import { computed } from "vue";
 // import { storeToRefs } from 'pinia';
 import { useProgressStore } from "../store/progress";
 import ProgressCard from "../components/ProgressCard.vue";
+import PostOpSection from "../components/PostOpSection.vue";
 import type { ProgressItemWithId } from "../types";
 import { useLocalStorage } from "../composables/useLocalStorage";
 import AccordionWithCheckboxes from "../components/AccordionWithCheckboxes.vue";
@@ -62,17 +63,14 @@ function setCheckboxState(id: string, value: boolean) {
       Is Nerando Done Yet?
     </h1>
 
-    <div v-if="false" class="text-red-600 text-center mb-4">
-      <!-- Error handling can be added if needed -->
-    </div>
-
     <div
       id="total-progress"
-      class="text-6xl font-bold text-center mb-12 text-gray-900 dark:text-white"
+      class="text-center mb-12"
       aria-live="polite"
       aria-atomic="true"
     >
-      {{ totalProgressPercentage }}%
+      <span class="text-6xl font-bold text-gray-900 dark:text-white">{{ totalProgressPercentage }}%</span>
+      <p class="text-lg text-gray-500 dark:text-gray-400 mt-1">complete</p>
     </div>
 
     <section class="mb-16 min-h-[70vh]" aria-labelledby="goals-heading">
@@ -80,7 +78,7 @@ function setCheckboxState(id: string, value: boolean) {
         id="goals-heading"
         class="text-3xl font-semibold text-center mb-8 text-gray-900 dark:text-white"
       >
-        2025 Goals Progress
+        {{ currentYear }} Goals Progress
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <progress-card
@@ -117,5 +115,11 @@ function setCheckboxState(id: string, value: boolean) {
         :setCheckboxState="setCheckboxState"
       />
     </section>
+
+    <PostOpSection
+      :year="currentYear"
+      :notes="yearData?.notes"
+      :recap="yearData?.recap"
+    />
   </main>
 </template>
