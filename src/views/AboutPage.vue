@@ -55,13 +55,13 @@ const whyPoints: { title: string; body: string }[] = [
         <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
           Progress, Made Public.
         </h1>
-        <p class="text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed drop-shadow mb-8">
-          <strong>IsNerandoDoneYet</strong> is a personal accountability system built for developers
+        <p class="text-xl text-white max-w-2xl mx-auto leading-relaxed drop-shadow mb-8">
+          <strong>IsNerandoDoneYet</strong> is my personal accountability system built as an example for developers
           who believe that showing your work is just as important as doing it.
         </p>
         <router-link
           to="/current"
-          class="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors shadow-lg"
+          class="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-colors shadow-lg"
         >
           Current Year's Progress
         </router-link>
