@@ -223,6 +223,33 @@
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
+/* ── Theme transitions & FOUC prevention ───────────────────── */
+html {
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Hide until a theme class is applied — prevents flash of unstyled content */
+html:not(.light):not(.dark) {
+  visibility: hidden;
+}
+html.light,
+html.dark {
+  visibility: visible;
+}
+
+html.dark  { color-scheme: dark; }
+html.light { color-scheme: light; }
+
+/* ── Shiki dual-theme (light tokens inlined; dark via CSS vars) */
+html.dark .shiki,
+html.dark .shiki span {
+  color:           var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style:      var(--shiki-dark-font-style) !important;
+  font-weight:     var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
 /* ── Base reset ────────────────────────────────────────────── */
 * { box-sizing: border-box; }
 
@@ -387,4 +414,17 @@ button { font-family: inherit; cursor: pointer; }
 }
 @media (min-width: 641px) and (max-width: 1024px) {
   .container { padding: var(--spacing-lg); }
+}
+
+/* ── Legacy utilities ──────────────────────────────────────── */
+.fixed-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border);
+  z-index: 1000;
+  padding: 10px 0;
+  box-shadow: var(--shadow-md);
 }
