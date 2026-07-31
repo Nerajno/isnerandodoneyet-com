@@ -1,52 +1,32 @@
 <script setup lang="ts">
 import { computed } from "vue";
-// import { storeToRefs } from 'pinia';
 import { useProgressStore } from "../store/progress";
 import ProgressCard from "../components/ProgressCard.vue";
 import PostOpSection from "../components/PostOpSection.vue";
-import type { ProgressItemWithId } from "../types";
+import type { ProgressItemWithId, TimelineUpdate } from "../types";
 import { useLocalStorage } from "../composables/useLocalStorage";
 import AccordionWithCheckboxes from "../components/AccordionWithCheckboxes.vue";
 
-// Type definitions
-// (IDs are added in the store's getter)
-
 const progressStore = useProgressStore();
-const { fetchProgressData, getYearData } = progressStore;
-const localStorage = useLocalStorage();
+const { fetchProgressData, getYearData, calculateOverallProgress } = progressStore;
+const { getCheckbox, setCheckbox } = useLocalStorage();
 
-// Get progress data from the store
 const progressData = computed<ProgressItemWithId[]>(
   () => fetchProgressData().categories
 );
 
-const totalProgressPercentage = computed(() => {
-  if (!progressData.value.length) return 0;
-  const totalCompleted = progressData.value.reduce(
-    (sum: number, category: ProgressItemWithId) => sum + category.completed,
-    0
-  );
-  const totalGoals = progressData.value.reduce(
-    (sum: number, category: ProgressItemWithId) => sum + category.total,
-    0
-  );
-  return Math.round((totalCompleted / totalGoals) * 100);
-});
-
 const currentYear = new Date().getFullYear();
+
+const totalProgressPercentage = computed(() =>
+  calculateOverallProgress(currentYear)
+);
+
 const yearData = computed(() => getYearData(currentYear));
 
 function getSectionItems(category: string) {
   return (
-    yearData.value?.updates.filter((u: any) => u.category === category) || []
+    yearData.value?.updates.filter((u: TimelineUpdate) => u.category === category) || []
   );
-}
-
-function getCheckboxState(id: string) {
-  return localStorage.getItem(`checkbox_${id}`) === "true";
-}
-function setCheckboxState(id: string, value: boolean) {
-  localStorage.setItem(`checkbox_${id}`, value ? "true" : "false");
 }
 </script>
 
@@ -95,24 +75,24 @@ function setCheckboxState(id: string, value: boolean) {
         title="Projects"
         description="A list of projects for the current year."
         :items="getSectionItems('Projects')"
-        :getCheckboxState="getCheckboxState"
-        :setCheckboxState="setCheckboxState"
+        :getCheckboxState="getCheckbox"
+        :setCheckboxState="setCheckbox"
       />
       <AccordionWithCheckboxes
         id="talks"
         title="Talks"
         description="Talks and presentations for the current year."
         :items="getSectionItems('Talks')"
-        :getCheckboxState="getCheckboxState"
-        :setCheckboxState="setCheckboxState"
+        :getCheckboxState="getCheckbox"
+        :setCheckboxState="setCheckbox"
       />
       <AccordionWithCheckboxes
         id="articles"
         title="Articles"
         description="Articles written or published this year."
         :items="getSectionItems('Articles')"
-        :getCheckboxState="getCheckboxState"
-        :setCheckboxState="setCheckboxState"
+        :getCheckboxState="getCheckbox"
+        :setCheckboxState="setCheckbox"
       />
     </section>
 

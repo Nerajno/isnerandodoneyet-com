@@ -93,7 +93,6 @@ const whyPoints: { title: string; body: string }[] = [
 
     <!-- What This Is -->
     <section class="mb-16 bg-white dark:bg-slate-800 rounded-2xl p-10 shadow border border-gray-100 dark:border-slate-700" aria-labelledby="what-heading">
-      <span class="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-2 block">What This Is</span>
       <h2 id="what-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
         One question. One answer. Updated live.
       </h2>
@@ -121,7 +120,6 @@ const whyPoints: { title: string; body: string }[] = [
 
     <!-- Why Public Accountability Works -->
     <section class="mb-16" aria-labelledby="why-heading">
-      <span class="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-2 block">Why It Works</span>
       <h2 id="why-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
         Public commitments carry weight.
       </h2>
@@ -167,7 +165,6 @@ const whyPoints: { title: string; body: string }[] = [
 
     <!-- The History -->
     <section class="mb-16" aria-labelledby="history-heading">
-      <span class="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-2 block">The History</span>
       <h2 id="history-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
         Seven years of shipping in public.
       </h2>

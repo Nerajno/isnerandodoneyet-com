@@ -492,7 +492,7 @@ const initialYears: YearlyData[] = [
         text: 'Revised my portfolio to its most current version',
         category: 'Projects',
         year: 2022,
-        link: { url: 'https://developindvlpr.com/', text: 'portfolio' },
+        link: { url: 'https://developingdvlpr.com/', text: 'portfolio' },
       },
       {
         date: 'December 2, 2022',

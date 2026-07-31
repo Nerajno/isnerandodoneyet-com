@@ -207,11 +207,3 @@ export type CreateTalkActivity = NewActivity<TalkActivity>;
 export type CreateProjectActivity = NewActivity<ProjectActivity>;
 export type CreateArticleActivity = NewActivity<ArticleActivity>;
 
-// Basic Update interface for updateService usage
-export interface Update {
-  id: string;
-  date: string;
-  text: string;
-  category?: string;
-  [key: string]: any;
-}

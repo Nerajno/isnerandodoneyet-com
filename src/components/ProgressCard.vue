@@ -1,47 +1,27 @@
-<script lang="ts">
-import { defineComponent, computed, onMounted, ref } from 'vue';
-import type { PropType } from 'vue';
+<script setup lang="ts">
+import { computed, onMounted, ref } from 'vue';
 import type { ProgressItem } from '../types';
 import ProgressBar from './ProgressBar.vue';
 
-export default defineComponent({
-  name: 'ProgressCard',
-  components: { ProgressBar },
-  props: {
-    item: {
-      type: Object as PropType<ProgressItem>,
-      required: true
-    }
-  },
-  setup(props) {
-    const circumference = 2 * Math.PI * 40;
-    const dashOffset = ref(circumference);
+const props = defineProps<{ item: ProgressItem }>();
 
-    const progressPercentage = computed(() => {
-      return Math.round((props.item.completed / props.item.total) * 100);
-    });
+const circumference = 2 * Math.PI * 40;
+const dashOffset = ref(circumference);
 
-    const formattedTitle = computed(() => {
-      return props.item.title.replace('\n', '<br />');
-    });
+const progressPercentage = computed(() => {
+  return Math.round((props.item.completed / props.item.total) * 100);
+});
 
-    onMounted(() => {
-      // Animate the progress ring
-      setTimeout(() => {
-        dashOffset.value = circumference - (progressPercentage.value / 100) * circumference;
-      }, 100);
-    });
+const formattedTitle = computed(() => {
+  return props.item.title.replace('\n', '<br />');
+});
 
-    return {
-      circumference,
-      dashOffset,
-      progressPercentage,
-      formattedTitle
-    };
-  }
+onMounted(() => {
+  setTimeout(() => {
+    dashOffset.value = circumference - (progressPercentage.value / 100) * circumference;
+  }, 100);
 });
 </script>
-
 
 <template>
   <div class="progress-card" role="region" :aria-label="`${item.title} progress card`" tabindex="0">

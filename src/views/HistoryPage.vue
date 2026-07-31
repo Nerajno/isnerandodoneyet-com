@@ -21,6 +21,7 @@ interface ImplementationCard {
 interface Stat {
   value: string;
   label: string;
+  icon: string;
 }
 
 interface Recommendation {
@@ -40,8 +41,8 @@ const timeline: TimelineEntry[] = [
     year: 2020,
     title: 'Surviving the Disruption',
     description:
-      '[PLACEHOLDER — describe how 2020 played out: COVID disruptions, conference cancellations, what kept the tracker alive and what lessons it surfaced about resilience.]',
-    highlights: ['1 article published', 'Conferences cancelled industry-wide', '[PLACEHOLDER — key lesson from the year]'],
+      'The pandemic shut down every in-person conference on the calendar. The tracker stayed alive on one article and a stubborn refusal to declare a gap year. It turned out public commitments are hardest — and most useful — when the external environment gives you every excuse to quit.',
+    highlights: ['1 article published', 'Conferences cancelled industry-wide', 'Accountability systems prove their value under disruption'],
   },
   {
     year: 2021,
@@ -62,7 +63,7 @@ const timeline: TimelineEntry[] = [
     title: 'Writing Volume',
     description:
       '5 articles published — the writing pace accelerated. Conference work pulled toward the "How !To Be Mentored" talk that would become a recurring keynote thread across future years.',
-    highlights: ['5 articles published', 'ConnectTech talk — Essential People Skills', '[PLACEHOLDER — any project notes from 2023]'],
+    highlights: ['5 articles published', 'ConnectTech talk — Essential People Skills', 'Laid groundwork for the Vue 3 rebuild'],
   },
   {
     year: 2024,
@@ -86,7 +87,7 @@ const implementations: ImplementationCard[] = [
     label: 'No build step required',
     name: 'HTML · CSS · JavaScript',
     description:
-      'The original format. A single HTML file, one JS data object, and a public URL. [PLACEHOLDER — describe what the first version looked like visually and what it tracked.]',
+      'The original format. A single HTML file, one JS data object, and a public URL. Three columns — Talks, Projects, Articles — rendered straight from a literal array. No build step, no dependencies, just a browser and a commitment.',
     cta: 'View Boilerplate',
     href: 'https://github.com/Nerajno/isnerandodoneyet-boilerplate-html',
   },
@@ -95,7 +96,7 @@ const implementations: ImplementationCard[] = [
     label: 'Current stack',
     name: 'Vue 3 · Tailwind CSS',
     description:
-      'The full rebuild. Pinia store, Vue Router, typed data layer, dark mode, and Tailwind v4. [PLACEHOLDER — describe what motivated the rewrite and when it went live.]',
+      'The full rebuild, shipped publicly in 2024. The flat-file format had served its purpose but couldn\'t scale to dark mode, typed data, or a component library. Pinia store, Vue Router, and Tailwind v4 — same three-column philosophy, modern infrastructure.',
     cta: 'View Boilerplate',
     href: 'https://github.com/Nerajno/isnerandodoneyet-boilerplate-vue',
   },
@@ -104,19 +105,19 @@ const implementations: ImplementationCard[] = [
     label: 'isnerandodoneyet.com',
     name: 'The Production Site',
     description:
-      '[PLACEHOLDER — describe what the current live site tracks, how often it updates, and what makes it different from the boilerplates.]',
+      'The live tracker for Nerando\'s current year — Talks, Projects, and Articles tracked publicly against annual targets. Updated at year-start with commitments and checked throughout the year. This is the system in production, not a demo.',
     cta: 'View Current Progress',
     href: '/current',
   },
 ];
 
 const stats: Stat[] = [
-  { value: '7+', label: 'Years Active' },
-  { value: '3', label: 'Disciplines Tracked' },
-  { value: '2', label: 'Open-Source Boilerplates' },
-  { value: '20+', label: 'Talks Given' },
-  { value: '20+', label: 'Articles Published' },
-  { value: '4+', label: 'Projects Shipped' },
+  { value: '7+', label: 'Years Active', icon: 'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5' },
+  { value: '3', label: 'Disciplines Tracked', icon: 'M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6' },
+  { value: '2', label: 'Open-Source Boilerplates', icon: 'M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5' },
+  { value: '20+', label: 'Talks Given', icon: 'M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z' },
+  { value: '20+', label: 'Articles Published', icon: 'M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z' },
+  { value: '4+', label: 'Projects Shipped', icon: 'M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z' },
 ];
 
 const recommendations: Recommendation[] = [
@@ -126,7 +127,7 @@ const recommendations: Recommendation[] = [
   },
   {
     title: 'Automate milestone logging.',
-    body: '[PLACEHOLDER — describe what manual update friction looks like and what a logged, automated system could look like going forward.]',
+    body: 'Every milestone currently requires a manual data edit. A GitHub Action or simple API hook that logs a talk accepted, an article published, or a project shipped — timestamped and committed automatically — would close the gap between doing the work and recording it.',
   },
   {
     title: 'Build a community forks showcase.',
@@ -168,19 +169,22 @@ const recommendations: Recommendation[] = [
         </h2>
         <div class="prose max-w-none space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
           <p>
-            [PLACEHOLDER — describe the moment the idea began: the problem with private goals, the
-            friction-free cost of giving up, and the decision to make a year's commitments
-            visible to anyone with a URL.]
+            Private goals are easy to abandon. When only you know the target, you can quietly
+            move it — redefine "done," extend the deadline, or just stop counting. The tracker
+            started with a simple hypothesis: if the commitments are public, the cost of quitting
+            goes up. A URL anybody can visit is a low-tech forcing function.
           </p>
           <p>
-            [PLACEHOLDER — describe what the first version looked like: a plain HTML file, three
-            categories, a public link shared with a handful of developer friends. What happened
-            when other people could see the progress in real time.]
+            Version one was a single HTML file with three columns — Talks, Projects, Articles —
+            and a shared link. No framework, no build step, no database. The accountability came
+            from the URL itself. When other developers could see the numbers in real time, the
+            numbers started moving.
           </p>
           <p>
-            [PLACEHOLDER — describe the evolution from v1 to the current Vue 3 stack: what drove
-            the rebuild, what stayed the same by design, and why two boilerplates now exist so
-            others can run the same system.]
+            By 2024 the stack had outgrown a flat file. The rebuild landed on Vue 3, Tailwind CSS,
+            and a typed data layer that could grow with the goals. The philosophy stayed identical.
+            Two boilerplates now exist so any developer can fork the system and run their own
+            version — same structure, their own commitments.
           </p>
         </div>
       </section>
@@ -195,7 +199,7 @@ const recommendations: Recommendation[] = [
         </h2>
 
         <ol class="relative border-l-2 border-gray-200 dark:border-slate-700 space-y-12 pl-8">
-          <li v-for="entry in timeline" :key="entry.year" class="relative">
+          <li v-for="entry in [...timeline].reverse()" :key="entry.year" class="relative">
             <!-- Year dot -->
             <span
               class="absolute -left-[2.6rem] top-1 flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-xs font-bold ring-4 ring-white dark:ring-slate-950"
@@ -305,6 +309,9 @@ const recommendations: Recommendation[] = [
             :key="stat.label"
             class="bg-white dark:bg-slate-800 rounded-xl p-6 text-center border border-gray-100 dark:border-slate-700 shadow-sm"
           >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-400 mx-auto mb-2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" :d="stat.icon" />
+            </svg>
             <dt class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ stat.label }}</dt>
             <dd class="text-4xl font-black text-blue-500">{{ stat.value }}</dd>
           </div>

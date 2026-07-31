@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
+import type { TimelineUpdate } from '../types';
 
-const props = defineProps<{
+defineProps<{
     id: string;
     title: string;
     description?: string;
-    items: any[];
+    items: TimelineUpdate[];
     getCheckboxState: (id: string) => boolean;
     setCheckboxState: (id: string, value: boolean) => void;
 }>();
@@ -14,81 +15,54 @@ const emit = defineEmits(['change']);
 
 const open = ref(false);
 
-function toggleAccordion() {
+function onToggle() {
     open.value = !open.value;
 }
-
-// Always render 10 items: real items first, then demo items
-const combinedItems = computed(() => {
-    const real = props.items.slice(0, 10);
-    const demoCount = 10 - real.length;
-    const demo = Array.from({ length: demoCount }, (_, i) => ({
-        isDemo: true,
-        idx: real.length + i + 1,
-        label: `Demo ${props.title.slice(0, -1)} ${real.length + i + 1}`,
-    }));
-    return [...real, ...demo];
-});
 </script>
 
 <template>
     <section class="w-[70vw] mx-auto my-16" :aria-labelledby="`${id}-heading`">
-        <h2 :id="`${id}-heading`" class="text-2xl font-bold mb-2 text-white flex items-center">
+        <h2 :id="`${id}-heading`" class="text-2xl font-bold mb-2 text-gray-900 dark:text-white flex items-center">
             <span>{{ title }}</span>
-            <!-- <svg :class="['ml-2 h-5 w-5 transition-transform', open ? 'rotate-180' : '']" fill="none"
-                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg> -->
         </h2>
-        <p v-if="description" class="mb-4 text-white">{{ description }}</p>
-        <details :open="open" class="mb-2 bg-white dark:bg-gray-800 rounded shadow group" @toggle="toggleAccordion"
-            :id="`${id}-accordion`">
+        <p v-if="description" class="mb-4 text-gray-600 dark:text-gray-400">{{ description }}</p>
+        <details
+            class="mb-2 bg-white dark:bg-gray-800 rounded shadow-sm border border-gray-200 dark:border-gray-700"
+            @toggle="onToggle"
+            :id="`${id}-accordion`"
+        >
             <summary
-                class="cursor-pointer px-4 py-2 font-semibold flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-                :aria-controls="`${id}-content`" :aria-expanded="open" tabindex="0">
+                class="cursor-pointer px-4 py-3 font-semibold flex items-center justify-between focus-visible:outline-2 focus-visible:outline-blue-500 rounded text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-750"
+                :aria-controls="`${id}-content`" tabindex="0">
                 <span>Show {{ title }}</span>
                 <svg :class="['h-4 w-4 ml-2 transition-transform', open ? 'rotate-180' : '']" fill="none"
                     stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
             </summary>
-            <div :id="`${id}-content`" class="p-4 space-y-2">
-                <p v-if="items.length === 0" class="text-sm text-gray-400 dark:text-gray-500 italic mb-3">
-                  No {{ title.toLowerCase() }} added yet — placeholders shown below.
-                </p>
-                <label v-for="(item, idx) in combinedItems" :key="item.id || item.idx || idx"
-                    class="flex items-center space-x-2 group text-white" :class="item.isDemo ? 'opacity-60' : ''">
-                    <input type="checkbox" class="form-checkbox accent-blue-500"
-                        :checked="item.isDemo ? false : getCheckboxState((item.id || idx).toString())"
-                        :disabled="item.isDemo"
-                        @change="!item.isDemo && setCheckboxState((item.id || idx).toString(), ($event.target as HTMLInputElement).checked); emit('change', item, ($event.target as HTMLInputElement).checked)"
-                        :id="`${id}-checkbox-${item.id || item.idx || idx}`" />
-                    <span class="text-white">
-                        <template v-if="item.isDemo">
-                            {{ item.label }}
-                        </template>
-                        <template v-else-if="item.link && item.link.url">
+            <div :id="`${id}-content`" class="px-4 pb-4 space-y-2" role="list">
+                <label v-for="(item, idx) in items" :key="idx"
+                    class="flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-50 dark:hover:bg-gray-750 cursor-pointer text-gray-700 dark:text-gray-300">
+                    <input type="checkbox" class="accent-blue-500 size-4"
+                        :checked="getCheckboxState(idx.toString())"
+                        @change="setCheckboxState(idx.toString(), ($event.target as HTMLInputElement).checked); emit('change', item, ($event.target as HTMLInputElement).checked)"
+                        :id="`${id}-checkbox-${idx}`" />
+                    <span>
+                        <template v-if="item.link && item.link.url">
                             <a :href="item.link.url" target="_blank" rel="noopener noreferrer"
-                                class="text-blue-300 hover:underline">
-                                {{ item.link.text || item.text || item.title || `Item ${idx + 1}` }}
+                                class="text-blue-600 dark:text-blue-400 hover:underline">
+                                {{ item.link.text || item.text || `Item ${idx + 1}` }}
                             </a>
                         </template>
                         <template v-else>
-                            {{ item.text || item.title || `Item ${idx + 1}` }}
+                            {{ item.text || `Item ${idx + 1}` }}
                         </template>
                     </span>
                 </label>
+                <p v-if="items.length === 0" class="text-sm text-gray-400 dark:text-gray-500 italic px-3">
+                    No {{ title.toLowerCase() }} added yet.
+                </p>
             </div>
         </details>
     </section>
 </template>
-
-<style scoped>
-.group:hover .group-hover\:bg-gray-100 {
-    background-color: #f3f4f6;
-}
-
-.group:focus-within .group-hover\:bg-gray-100 {
-    background-color: #f3f4f6;
-}
-</style>

@@ -8,14 +8,8 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  percentage: {
-    type: Number,
-    required: true
-  },
-  color: {
-    type: String,
-    default: 'var(--color-accent)'
-  }
-});
+defineProps<{
+  percentage: number;
+  color?: string;
+}>();
 </script>

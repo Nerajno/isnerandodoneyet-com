@@ -24,9 +24,19 @@ export function useLocalStorage() {
     }
   }
 
+  function getCheckbox(id: string): boolean {
+    return getItem(`checkbox_${id}`) === 'true';
+  }
+
+  function setCheckbox(id: string, value: boolean): void {
+    setItem(`checkbox_${id}`, value ? 'true' : 'false');
+  }
+
   return {
     getItem,
     setItem,
-    removeItem
+    removeItem,
+    getCheckbox,
+    setCheckbox,
   };
 }

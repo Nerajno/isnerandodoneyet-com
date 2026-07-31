@@ -10,7 +10,7 @@ import { useLocalStorage } from '../composables/useLocalStorage';
 const props = defineProps<{ year: number }>();
 const router = useRouter();
 const progressStore = useProgressStore();
-const localStorage = useLocalStorage();
+const { getCheckbox, setCheckbox } = useLocalStorage();
 
 const yearData = computed(() => progressStore.getYearData(props.year));
 
@@ -24,13 +24,6 @@ const totalProgressPercentage = computed(() =>
 
 function getSectionItems(category: string) {
   return yearData.value?.updates.filter((u) => u.category === category) || [];
-}
-
-function getCheckboxState(id: string) {
-  return localStorage.getItem(`checkbox_${id}`) === 'true';
-}
-function setCheckboxState(id: string, value: boolean) {
-  localStorage.setItem(`checkbox_${id}`, value ? 'true' : 'false');
 }
 
 const uniqueCategories = computed(() =>
@@ -81,8 +74,8 @@ const uniqueCategories = computed(() =>
           :title="cat"
           :description="`${cat} for ${year}.`"
           :items="getSectionItems(cat)"
-          :getCheckboxState="getCheckboxState"
-          :setCheckboxState="setCheckboxState"
+          :getCheckboxState="getCheckbox"
+          :setCheckboxState="setCheckbox"
         />
       </section>
 
