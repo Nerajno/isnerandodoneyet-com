@@ -2,7 +2,7 @@
   <main id="main-content" tabindex="-1" aria-label="Page not found" class="outline-none">
     <div class="flex flex-col items-center justify-center min-h-[60vh] text-center">
       <p class="text-8xl font-bold text-blue-600 dark:text-blue-400 mb-4">404</p>
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Page Not Found</h1>
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 font-display">Page Not Found</h1>
       <p class="text-gray-500 dark:text-gray-400 mb-10">
         That page doesn't exist — but Nerando's goals page does.
       </p>

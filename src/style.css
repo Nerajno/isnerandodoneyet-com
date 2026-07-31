@@ -6,7 +6,7 @@
    ============================================================ */
 
 :root {
-  font-family: 'Inter Variable', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.6;
   font-weight: 400;
   color-scheme: dark light;
@@ -27,26 +27,26 @@
   --color-border:           #374151;  /* gray-700 */
   --color-border-light:     #4b5563;  /* gray-600 */
 
-  --color-accent:           #65a30d;  /* lime-600 */
-  --color-accent-hover:     #4d7c0f;  /* lime-700 */
-  --color-accent-light:     #1a2e05;  /* lime-950 */
-  --color-accent-text:      #bef264;  /* lime-300 */
-  --color-accent-bright:    #a3e635;  /* lime-400 */
+  --color-accent:           #38bdf8;  /* sky-400 */
+  --color-accent-hover:     #0ea5e9;  /* sky-500 */
+  --color-accent-light:     #082f49;  /* sky-950 */
+  --color-accent-text:      #bae6fd;  /* sky-200 */
+  --color-accent-bright:    #7dd3fc;  /* sky-300 */
 
-  --color-info:             #38bdf8;  /* sky-400  */
-  --color-info-hover:       #0ea5e9;  /* sky-500  */
-  --color-info-light:       #082f49;  /* sky-950  */
-  --color-info-text:        #bae6fd;  /* sky-200  */
+  --color-info:             #38bdf8;  /* sky-400 */
+  --color-info-hover:       #0ea5e9;  /* sky-500 */
+  --color-info-light:       #082f49;  /* sky-950 */
+  --color-info-text:        #bae6fd;  /* sky-200 */
 
-  --color-active:           #38bdf8;  /* sky-400  */
-  --color-active-hover:     #0ea5e9;  /* sky-500  */
-  --color-active-light:     #082f49;  /* sky-950  */
-  --color-active-text:      #bae6fd;  /* sky-200  */
+  --color-active:           #38bdf8;  /* sky-400 */
+  --color-active-hover:     #0ea5e9;  /* sky-500 */
+  --color-active-light:     #082f49;  /* sky-950 */
+  --color-active-text:      #bae6fd;  /* sky-200 */
 
-  --color-milestone:        #a3e635;  /* lime-400 */
-  --color-milestone-hover:  #84cc16;  /* lime-500 */
-  --color-milestone-light:  #1a2e05;  /* lime-950 */
-  --color-milestone-text:   #d9f99d;  /* lime-200 */
+  --color-milestone:        #7dd3fc;  /* sky-300 */
+  --color-milestone-hover:  #38bdf8;  /* sky-400 */
+  --color-milestone-light:  #082f49;  /* sky-950 */
+  --color-milestone-text:   #e0f2fe;  /* sky-100 */
 
   --color-success:          #4ade80;  /* green-400 */
   --color-success-light:    #052e16;  /* green-950 */
@@ -56,9 +56,9 @@
   --color-warning-light:    #451a03;  /* amber-950 */
   --color-warning-text:     #fde68a;  /* amber-200 */
 
-  --color-error:            #f43f5e;  /* rose-500  */
-  --color-error-light:      #4c0519;  /* rose-950  */
-  --color-error-text:       #fecdd3;  /* rose-200  */
+  --color-error:            #f43f5e;  /* rose-500 */
+  --color-error-light:      #4c0519;  /* rose-950 */
+  --color-error-text:       #fecdd3;  /* rose-200 */
 
   /* Spacing scale */
   --spacing-xs:  0.25rem;
@@ -100,26 +100,26 @@
     --color-border:           #e5e7eb;  /* gray-200 */
     --color-border-light:     #f3f4f6;  /* gray-100 */
 
-    --color-accent:           #65a30d;  /* lime-600 */
-    --color-accent-hover:     #4d7c0f;  /* lime-700 */
-    --color-accent-light:     #ecfccb;  /* lime-100 */
-    --color-accent-text:      #365314;  /* lime-900 */
-    --color-accent-bright:    #65a30d;  /* lime-600 */
+    --color-accent:           #0284c7;  /* sky-600 */
+    --color-accent-hover:     #0369a1;  /* sky-700 */
+    --color-accent-light:     #e0f2fe;  /* sky-100 */
+    --color-accent-text:      #0c4a6e;  /* sky-900 */
+    --color-accent-bright:    #0284c7;  /* sky-600 */
 
-    --color-info:             #0284c7;  /* sky-600  */
-    --color-info-hover:       #0369a1;  /* sky-700  */
-    --color-info-light:       #e0f2fe;  /* sky-100  */
-    --color-info-text:        #0c4a6e;  /* sky-900  */
+    --color-info:             #0284c7;  /* sky-600 */
+    --color-info-hover:       #0369a1;  /* sky-700 */
+    --color-info-light:       #e0f2fe;  /* sky-100 */
+    --color-info-text:        #0c4a6e;  /* sky-900 */
 
-    --color-active:           #0284c7;  /* sky-600  */
-    --color-active-hover:     #0369a1;  /* sky-700  */
-    --color-active-light:     #e0f2fe;  /* sky-100  */
-    --color-active-text:      #0c4a6e;  /* sky-900  */
+    --color-active:           #0284c7;  /* sky-600 */
+    --color-active-hover:     #0369a1;  /* sky-700 */
+    --color-active-light:     #e0f2fe;  /* sky-100 */
+    --color-active-text:      #0c4a6e;  /* sky-900 */
 
-    --color-milestone:        #65a30d;  /* lime-600 */
-    --color-milestone-hover:  #4d7c0f;  /* lime-700 */
-    --color-milestone-light:  #ecfccb;  /* lime-100 */
-    --color-milestone-text:   #365314;  /* lime-900 */
+    --color-milestone:        #0284c7;  /* sky-600 */
+    --color-milestone-hover:  #0369a1;  /* sky-700 */
+    --color-milestone-light:  #e0f2fe;  /* sky-100 */
+    --color-milestone-text:   #0c4a6e;  /* sky-900 */
 
     --color-success:          #16a34a;  /* green-600 */
     --color-success-light:    #dcfce7;  /* green-100 */
@@ -150,11 +150,11 @@
   --color-bg-tertiary:      #374151;
   --color-border:           #374151;
   --color-border-light:     #4b5563;
-  --color-accent:           #65a30d;
-  --color-accent-hover:     #4d7c0f;
-  --color-accent-light:     #1a2e05;
-  --color-accent-text:      #bef264;
-  --color-accent-bright:    #a3e635;
+  --color-accent:           #38bdf8;  /* sky-400 */
+  --color-accent-hover:     #0ea5e9;  /* sky-500 */
+  --color-accent-light:     #082f49;  /* sky-950 */
+  --color-accent-text:      #bae6fd;  /* sky-200 */
+  --color-accent-bright:    #7dd3fc;  /* sky-300 */
   --color-info:             #38bdf8;
   --color-info-hover:       #0ea5e9;
   --color-info-light:       #082f49;
@@ -163,10 +163,10 @@
   --color-active-hover:     #0ea5e9;
   --color-active-light:     #082f49;
   --color-active-text:      #bae6fd;
-  --color-milestone:        #a3e635;
-  --color-milestone-hover:  #84cc16;
-  --color-milestone-light:  #1a2e05;
-  --color-milestone-text:   #d9f99d;
+  --color-milestone:        #7dd3fc;
+  --color-milestone-hover:  #38bdf8;
+  --color-milestone-light:  #082f49;
+  --color-milestone-text:   #e0f2fe;
   --color-success:          #4ade80;
   --color-success-light:    #052e16;
   --color-success-text:     #bbf7d0;
@@ -191,11 +191,11 @@
   --color-bg-tertiary:      #f3f4f6;
   --color-border:           #e5e7eb;
   --color-border-light:     #f3f4f6;
-  --color-accent:           #65a30d;
-  --color-accent-hover:     #4d7c0f;
-  --color-accent-light:     #ecfccb;
-  --color-accent-text:      #365314;
-  --color-accent-bright:    #65a30d;
+  --color-accent:           #0284c7;  /* sky-600 */
+  --color-accent-hover:     #0369a1;  /* sky-700 */
+  --color-accent-light:     #e0f2fe;  /* sky-100 */
+  --color-accent-text:      #0c4a6e;  /* sky-900 */
+  --color-accent-bright:    #0284c7;  /* sky-600 */
   --color-info:             #0284c7;
   --color-info-hover:       #0369a1;
   --color-info-light:       #e0f2fe;
@@ -204,10 +204,10 @@
   --color-active-hover:     #0369a1;
   --color-active-light:     #e0f2fe;
   --color-active-text:      #0c4a6e;
-  --color-milestone:        #65a30d;
-  --color-milestone-hover:  #4d7c0f;
-  --color-milestone-light:  #ecfccb;
-  --color-milestone-text:   #365314;
+  --color-milestone:        #0284c7;
+  --color-milestone-hover:  #0369a1;
+  --color-milestone-light:  #e0f2fe;
+  --color-milestone-text:   #0c4a6e;
   --color-success:          #16a34a;
   --color-success-light:    #dcfce7;
   --color-success-text:     #14532d;

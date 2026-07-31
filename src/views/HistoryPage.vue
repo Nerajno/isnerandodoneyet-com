@@ -1,11 +1,28 @@
 <script setup lang="ts">
 // HistoryPage.vue — /history
 // Static content page. All [PLACEHOLDER] text is marked for easy find/replace.
+//
+// Counts (stats block, hero copy, section intros) are DERIVED from `timeline`
+// and `implementations` — there are no hand-tallied numbers in the template.
+// Adding a year to `timeline` updates every total on the page.
+
+import { computed } from 'vue';
+import { useReveal } from '../composables/useReveal';
+
+useReveal();
+
+interface YearCounts {
+  talks: number;
+  projects: number;
+  articles: number;
+}
 
 interface TimelineEntry {
   year: number;
   title: string;
   description: string;
+  /** Source of truth for every total rendered on this page. */
+  counts: YearCounts;
   highlights: string[];
 }
 
@@ -16,6 +33,8 @@ interface ImplementationCard {
   description: string;
   cta: string;
   href: string;
+  /** The production site, not a forkable version. Excluded from version counts. */
+  isLive?: boolean;
 }
 
 interface Stat {
@@ -29,12 +48,17 @@ interface Recommendation {
   body: string;
 }
 
+/* ------------------------------------------------------------------ */
+/* Data                                                                */
+/* ------------------------------------------------------------------ */
+
 const timeline: TimelineEntry[] = [
   {
     year: 2019,
     title: 'The First Tracker',
     description:
       'The initiative launched with a plain HTML file, three goal categories, and a public URL. Four articles shipped — the writing habit that would carry every year after.',
+    counts: { talks: 0, projects: 0, articles: 4 },
     highlights: ['4 articles published', 'First public accountability URL', 'Tracker concept proven'],
   },
   {
@@ -42,6 +66,7 @@ const timeline: TimelineEntry[] = [
     title: 'Surviving the Disruption',
     description:
       'The pandemic shut down every in-person conference on the calendar. The tracker stayed alive on one article and a stubborn refusal to declare a gap year. It turned out public commitments are hardest — and most useful — when the external environment gives you every excuse to quit.',
+    counts: { talks: 0, projects: 0, articles: 1 },
     highlights: ['1 article published', 'Conferences cancelled industry-wide', 'Accountability systems prove their value under disruption'],
   },
   {
@@ -49,6 +74,7 @@ const timeline: TimelineEntry[] = [
     title: 'Community Roots',
     description:
       'The tracker went quieter on output but the community footprint grew. A Virtual Coffee lightning talk on leveraging developer community marked the first time the initiative\'s philosophy went on stage.',
+    counts: { talks: 1, projects: 0, articles: 1 },
     highlights: ['1 article published', 'Virtual Coffee lightning talk', 'Community-first approach solidified'],
   },
   {
@@ -56,6 +82,7 @@ const timeline: TimelineEntry[] = [
     title: 'The Breakout Year',
     description:
       'Ten talks completed — a perfect score on the hardest category. MagnoliaJS, Refactr, AtlDevCon, ConnectTech, Prairie Dev Con. The tracker became a proof of concept worth forking.',
+    counts: { talks: 10, projects: 2, articles: 2 },
     highlights: ['10/10 talks — first perfect year', '2 projects shipped (portfolio + Burble)', '2 articles published', 'First Sessionize & PaperCall profiles live'],
   },
   {
@@ -63,6 +90,7 @@ const timeline: TimelineEntry[] = [
     title: 'Writing Volume',
     description:
       '5 articles published — the writing pace accelerated. Conference work pulled toward the "How !To Be Mentored" talk that would become a recurring keynote thread across future years.',
+    counts: { talks: 1, projects: 0, articles: 5 },
     highlights: ['5 articles published', 'ConnectTech talk — Essential People Skills', 'Laid groundwork for the Vue 3 rebuild'],
   },
   {
@@ -70,6 +98,7 @@ const timeline: TimelineEntry[] = [
     title: 'Rebuilding Momentum',
     description:
       'A reset year. The Vue 3 rebuild of the tracker launched publicly. Two talks, two articles, two podcast/media appearances — not the numbers, but the infrastructure was now solid.',
+    counts: { talks: 2, projects: 0, articles: 2 },
     highlights: ['Vue 3 + Tailwind rebuild shipped', 'Orlando Code Camp + ConnectTech talks', 'Virtual Coffee Podcast appearance', 'GEO writing series began'],
   },
   {
@@ -77,6 +106,7 @@ const timeline: TimelineEntry[] = [
     title: 'Best Year Yet',
     description:
       '8 talks across the southeast circuit — DevNexus, 200OK, MagnoliaConf and more. 9 articles including the breakout GEO series. 2 projects shipped: DevelopingDvlpr and IsNerandoDoneYet. Two boilerplates released.',
+    counts: { talks: 8, projects: 2, articles: 9 },
     highlights: ['8/10 talks — strongest conference year', '9/10 articles — GEO series broke out', '2 projects shipped', '2 open-source boilerplates released'],
   },
 ];
@@ -108,16 +138,8 @@ const implementations: ImplementationCard[] = [
       'The live tracker for Nerando\'s current year — Talks, Projects, and Articles tracked publicly against annual targets. Updated at year-start with commitments and checked throughout the year. This is the system in production, not a demo.',
     cta: 'View Current Progress',
     href: '/current',
+    isLive: true,
   },
-];
-
-const stats: Stat[] = [
-  { value: '7+', label: 'Years Active', icon: 'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5' },
-  { value: '3', label: 'Disciplines Tracked', icon: 'M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6' },
-  { value: '2', label: 'Open-Source Boilerplates', icon: 'M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5' },
-  { value: '20+', label: 'Talks Given', icon: 'M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z' },
-  { value: '20+', label: 'Articles Published', icon: 'M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z' },
-  { value: '4+', label: 'Projects Shipped', icon: 'M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z' },
 ];
 
 const recommendations: Recommendation[] = [
@@ -138,22 +160,89 @@ const recommendations: Recommendation[] = [
     body: 'The 2025 notes and recap fields in the data model are the seed. A dedicated retrospective view per year — accessible at /year/:year — would make the history navigable.',
   },
 ];
+
+const icons = {
+  calendar: 'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5',
+  disciplines: 'M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6',
+  code: 'M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5',
+  mic: 'M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z',
+  article: 'M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z',
+  rocket: 'M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z',
+} as const;
+
+/* ------------------------------------------------------------------ */
+/* Derived values                                                      */
+/* ------------------------------------------------------------------ */
+
+const NUMBER_WORDS = [
+  'zero', 'one', 'two', 'three', 'four', 'five',
+  'six', 'seven', 'eight', 'nine', 'ten',
+] as const;
+
+const toWord = (n: number): string => NUMBER_WORDS[n] ?? String(n);
+
+const isExternal = (href: string): boolean => /^https?:\/\//.test(href);
+
+/** Display order is newest-first; computed once instead of re-sorting per render. */
+const timelineNewestFirst = computed(() => [...timeline].reverse());
+
+const firstYear = timeline[0]?.year ?? new Date().getFullYear();
+
+const totals = computed<YearCounts>(() =>
+  timeline.reduce<YearCounts>(
+    (acc, entry) => ({
+      talks: acc.talks + entry.counts.talks,
+      projects: acc.projects + entry.counts.projects,
+      articles: acc.articles + entry.counts.articles,
+    }),
+    { talks: 0, projects: 0, articles: 0 },
+  ),
+);
+
+const yearsActive = computed(() => new Date().getFullYear() - firstYear + 1);
+
+/** Forkable versions only — the live production site isn't a boilerplate. */
+const boilerplateCount = computed(() => implementations.filter((i) => !i.isLive).length);
+
+const disciplineCount = computed(() => Object.keys(totals.value).length);
+
+const stats = computed<Stat[]>(() => [
+  { value: String(yearsActive.value), label: 'Years Active', icon: icons.calendar },
+  { value: String(disciplineCount.value), label: 'Disciplines Tracked', icon: icons.disciplines },
+  { value: String(boilerplateCount.value), label: 'Open-Source Boilerplates', icon: icons.code },
+  { value: String(totals.value.talks), label: 'Talks Given', icon: icons.mic },
+  { value: String(totals.value.articles), label: 'Articles Published', icon: icons.article },
+  { value: String(totals.value.projects), label: 'Projects Shipped', icon: icons.rocket },
+]);
+
+/* Shared focus-visible treatment — WCAG 2.4.7 / 2.4.13. */
+const focusRing =
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ' +
+  'focus-visible:ring-offset-2 dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-slate-900';
 </script>
 
 <template>
+  <!--
+    `outline-none` is safe here: #main-content is a tabindex="-1" skip-link
+    target, so it is never reached by Tab and never needs a focus ring.
+  -->
   <main id="main-content" tabindex="-1" aria-label="History" class="outline-none">
 
     <!-- SECTION: Hero -->
     <section class="relative overflow-hidden flex items-center justify-center text-center py-28 mb-12 min-h-[50vh] bg-gray-900 dark:bg-slate-950">
       <div class="absolute inset-0 bg-gradient-to-br from-blue-950/60 via-gray-900 to-gray-950" aria-hidden="true"></div>
       <div class="relative z-10 max-w-3xl mx-auto px-6">
-        <span class="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-4 block">2019 – Present</span>
-        <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+        <span class="text-xs font-semibold uppercase tracking-widest text-blue-300 mb-4 block">
+          {{ firstYear }} – Present
+        </span>
+        <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight font-display">
           The History of IsNerandoDoneYet
         </h1>
         <p class="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
           A public accountability tracker for developers — tracking Talks, Projects, and Articles
-          since 2019, across two tech stacks, two boilerplates, and seven years of shipping in public.
+          since {{ firstYear }}, across {{ toWord(boilerplateCount) }} tech stacks,
+          {{ toWord(boilerplateCount) }} boilerplates, and {{ toWord(yearsActive) }} years of
+          shipping in public.
         </p>
       </div>
     </section>
@@ -162,12 +251,14 @@ const recommendations: Recommendation[] = [
     <div class="max-w-4xl mx-auto px-6">
 
       <!-- SECTION: Origin Story -->
-      <section class="mb-16" aria-labelledby="origin-heading">
-        <span class="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-2 block">Origin Story</span>
-        <h2 id="origin-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+      <section class="mb-16" aria-labelledby="origin-heading" data-reveal>
+        <span class="text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2 block">Origin Story</span>
+        <h2 id="origin-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-6 font-display">
           It started with a simple question.
         </h2>
-        <div class="prose max-w-none space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+        <!-- `prose` removed: it is a no-op without @tailwindcss/typography and
+             fights these explicit colour utilities when the plugin IS present. -->
+        <div class="max-w-none space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
           <p>
             Private goals are easy to abandon. When only you know the target, you can quietly
             move it — redefine "done," extend the deadline, or just stop counting. The tracker
@@ -183,8 +274,9 @@ const recommendations: Recommendation[] = [
           <p>
             By 2024 the stack had outgrown a flat file. The rebuild landed on Vue 3, Tailwind CSS,
             and a typed data layer that could grow with the goals. The philosophy stayed identical.
-            Two boilerplates now exist so any developer can fork the system and run their own
-            version — same structure, their own commitments.
+            {{ toWord(boilerplateCount).replace(/^\w/, (c) => c.toUpperCase()) }} boilerplates now
+            exist so any developer can fork the system and run their own version — same structure,
+            their own commitments.
           </p>
         </div>
       </section>
@@ -192,15 +284,16 @@ const recommendations: Recommendation[] = [
       <hr class="border-gray-200 dark:border-slate-700 mb-16" />
 
       <!-- SECTION: Timeline of Implementations -->
-      <section class="mb-16" aria-labelledby="timeline-heading">
-        <span class="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-2 block">Year by Year</span>
-        <h2 id="timeline-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-10">
+      <section class="mb-16" aria-labelledby="timeline-heading" data-reveal>
+        <span class="text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2 block">Year by Year</span>
+        <h2 id="timeline-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-10 font-display">
           Timeline of Implementations
         </h2>
 
-        <ol class="relative border-l-2 border-gray-200 dark:border-slate-700 space-y-12 pl-8">
-          <li v-for="entry in [...timeline].reverse()" :key="entry.year" class="relative">
-            <!-- Year dot -->
+        <!-- `reversed` keeps the list semantics honest: newest year first. -->
+        <ol reversed class="relative border-l-2 border-gray-200 dark:border-slate-700 space-y-12 pl-8">
+          <li v-for="entry in timelineNewestFirst" :key="entry.year" class="relative">
+            <!-- Year dot: duplicates the visible year label below, so hide it from AT. -->
             <span
               class="absolute -left-[2.6rem] top-1 flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-xs font-bold ring-4 ring-white dark:ring-slate-950"
               aria-hidden="true"
@@ -209,7 +302,7 @@ const recommendations: Recommendation[] = [
             </span>
 
             <!-- Year label -->
-            <p class="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-1">{{ entry.year }}</p>
+            <p class="text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-1">{{ entry.year }}</p>
 
             <!-- Title -->
             <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ entry.title }}</h3>
@@ -222,19 +315,23 @@ const recommendations: Recommendation[] = [
               <li
                 v-for="h in entry.highlights"
                 :key="h"
-                class="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-slate-700"
+                class="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-slate-700"
               >
                 {{ h }}
               </li>
             </ul>
 
-            <!-- Screenshot placeholder -->
+            <!--
+              Screenshot placeholder. Hidden from assistive tech: announcing a
+              "screenshot placeholder" image that does not exist is noise.
+              When the real asset lands, swap this block for:
+              <img :src="entry.screenshot" :alt="`The ${entry.year} tracker — ${entry.title}`" class="w-full aspect-video rounded-xl object-cover" />
+            -->
             <div
               class="w-full aspect-video bg-gray-100 dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 flex items-center justify-center"
-              role="img"
-              :aria-label="`Screenshot placeholder for ${entry.year} — ${entry.title}`"
+              aria-hidden="true"
             >
-              <span class="text-sm text-gray-400 dark:text-gray-500 font-mono">
+              <span class="text-sm text-gray-500 dark:text-gray-400 font-mono">
                 [PLACEHOLDER — Screenshot {{ entry.year }}: {{ entry.title }}]
               </span>
             </div>
@@ -245,28 +342,28 @@ const recommendations: Recommendation[] = [
       <hr class="border-gray-200 dark:border-slate-700 mb-16" />
 
       <!-- SECTION: Previous Implementations Gallery -->
-      <section class="mb-16" aria-labelledby="implementations-heading">
-        <span class="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-2 block">Versions</span>
-        <h2 id="implementations-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+      <section class="mb-16" aria-labelledby="implementations-heading" data-reveal>
+        <span class="text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2 block">Versions</span>
+        <h2 id="implementations-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4 font-display">
           Previous Implementations
         </h2>
         <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-10 max-w-2xl">
-          The tracker has taken two distinct forms. Both are open source. Both are documented for anyone who wants to run the same system.
+          The tracker has taken {{ toWord(boilerplateCount) }} distinct forms, both open source and
+          documented for anyone who wants to run the same system — plus the live site running today.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div
+        <ul class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <li
             v-for="impl in implementations"
             :key="impl.version"
             class="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm overflow-hidden flex flex-col"
           >
-            <!-- Screenshot placeholder -->
+            <!-- Screenshot placeholder — decorative until the real asset exists. -->
             <div
               class="w-full aspect-video bg-gray-100 dark:bg-slate-700 flex items-center justify-center"
-              role="img"
-              :aria-label="`Screenshot placeholder — ${impl.name}`"
+              aria-hidden="true"
             >
-              <span class="text-xs text-gray-400 dark:text-gray-500 font-mono px-4 text-center">
+              <span class="text-xs text-gray-500 dark:text-gray-300 font-mono px-4 text-center">
                 [PLACEHOLDER — {{ impl.name }}]
               </span>
             </div>
@@ -274,32 +371,44 @@ const recommendations: Recommendation[] = [
             <!-- Card body -->
             <div class="p-6 flex flex-col flex-1">
               <div class="flex items-center gap-2 mb-3">
-                <span class="text-xs font-bold uppercase tracking-widest bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full">
+                <span class="text-xs font-bold uppercase tracking-widest bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-200 px-2 py-0.5 rounded-full">
                   {{ impl.version }}
                 </span>
-                <span class="text-xs text-gray-400">{{ impl.label }}</span>
+                <span class="text-xs text-gray-600 dark:text-gray-300">{{ impl.label }}</span>
               </div>
               <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">{{ impl.name }}</h3>
-              <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-6 flex-1">{{ impl.description }}</p>
-              <a
-                :href="impl.href"
-                :target="impl.href.startsWith('http') ? '_blank' : undefined"
-                :rel="impl.href.startsWith('http') ? 'noopener noreferrer' : undefined"
-                class="inline-flex items-center justify-center px-4 py-2.5 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white text-sm font-semibold rounded-xl hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-colors"
+              <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-6 flex-1">{{ impl.description }}</p>
+
+              <!--
+                Internal hrefs render as <router-link> so /current is a client-side
+                navigation instead of a full page reload.
+              -->
+              <component
+                :is="isExternal(impl.href) ? 'a' : 'router-link'"
+                v-bind="isExternal(impl.href)
+                  ? { href: impl.href, target: '_blank', rel: 'noopener noreferrer' }
+                  : { to: impl.href }"
+                :class="[
+                  'inline-flex items-center justify-center px-4 py-2.5 border-2 border-gray-900 dark:border-white',
+                  'text-gray-900 dark:text-white text-sm font-semibold rounded-xl transition-colors',
+                  'hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900',
+                  focusRing,
+                ]"
               >
-                {{ impl.cta }}
-              </a>
+                <span>{{ impl.cta }}</span>
+                <span v-if="isExternal(impl.href)" class="sr-only"> (opens in a new tab)</span>
+              </component>
             </div>
-          </div>
-        </div>
+          </li>
+        </ul>
       </section>
 
       <hr class="border-gray-200 dark:border-slate-700 mb-16" />
 
       <!-- SECTION: Key Outcomes & Stats -->
-      <section class="mb-16" aria-labelledby="stats-heading">
-        <span class="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-2 block">By the Numbers</span>
-        <h2 id="stats-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-10">
+      <section class="mb-16" aria-labelledby="stats-heading" data-reveal>
+        <span class="text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2 block">By the Numbers</span>
+        <h2 id="stats-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-10 font-display">
           Key Outcomes
         </h2>
 
@@ -309,11 +418,11 @@ const recommendations: Recommendation[] = [
             :key="stat.label"
             class="bg-white dark:bg-slate-800 rounded-xl p-6 text-center border border-gray-100 dark:border-slate-700 shadow-sm"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-400 mx-auto mb-2" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600 dark:text-blue-400 mx-auto mb-2" aria-hidden="true" focusable="false">
               <path stroke-linecap="round" stroke-linejoin="round" :d="stat.icon" />
             </svg>
-            <dt class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ stat.label }}</dt>
-            <dd class="text-4xl font-black text-blue-500">{{ stat.value }}</dd>
+            <dt class="text-sm text-gray-600 dark:text-gray-300 mb-1">{{ stat.label }}</dt>
+            <dd class="text-4xl font-black text-blue-600 dark:text-blue-400">{{ stat.value }}</dd>
           </div>
         </dl>
       </section>
@@ -321,38 +430,48 @@ const recommendations: Recommendation[] = [
       <hr class="border-gray-200 dark:border-slate-700 mb-16" />
 
       <!-- SECTION: Recommendations / What's Next -->
-      <section class="mb-16" aria-labelledby="recommendations-heading">
-        <span class="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-2 block">Looking Forward</span>
-        <h2 id="recommendations-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+      <section class="mb-16" aria-labelledby="recommendations-heading" data-reveal>
+        <span class="text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-2 block">Looking Forward</span>
+        <h2 id="recommendations-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4 font-display">
           What the history recommends.
         </h2>
         <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-10 max-w-2xl">
-          Seven years of data surfaces patterns. These are the four things the record says to do next.
+          {{ toWord(yearsActive).replace(/^\w/, (c) => c.toUpperCase()) }} years of data surfaces
+          patterns. These are the {{ toWord(recommendations.length) }} things the record says to do next.
         </p>
 
-        <div class="space-y-4 mb-12">
-          <div
+        <ol class="space-y-4 mb-12">
+          <li
             v-for="(rec, i) in recommendations"
             :key="rec.title"
             class="flex items-start gap-5 bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-100 dark:border-slate-700 shadow-sm"
           >
-            <span class="text-2xl font-black text-blue-200 dark:text-blue-900 flex-shrink-0 leading-none mt-0.5">
+            <!-- Decorative numeral: the <ol> already conveys order to AT. -->
+            <span
+              class="text-2xl font-black text-blue-200 dark:text-blue-900 flex-shrink-0 leading-none mt-0.5"
+              aria-hidden="true"
+            >
               {{ String(i + 1).padStart(2, '0') }}
             </span>
             <div>
               <p class="font-semibold text-gray-900 dark:text-white mb-1">{{ rec.title }}</p>
-              <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{{ rec.body }}</p>
+              <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{{ rec.body }}</p>
             </div>
-          </div>
-        </div>
+          </li>
+        </ol>
 
         <!-- CTA -->
         <div class="text-center">
           <router-link
             to="/current"
-            class="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors shadow"
+            :class="[
+              'inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700',
+              'text-white font-semibold rounded-xl transition-colors shadow',
+              focusRing,
+            ]"
           >
-            See Current Progress →
+            See Current Progress
+            <span aria-hidden="true">→</span>
           </router-link>
         </div>
       </section>

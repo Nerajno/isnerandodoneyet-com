@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
   <section class="mt-20 border-t border-gray-200 dark:border-slate-700 pt-12" aria-labelledby="postop-heading">
-    <h2 id="postop-heading" class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+    <h2 id="postop-heading" class="text-2xl font-bold text-gray-900 dark:text-white mb-2 font-display">
       {{ year ? `${year} — Reflections & Recap` : 'Reflections & Recap' }}
     </h2>
     <p class="text-sm text-gray-500 dark:text-gray-400 mb-8">

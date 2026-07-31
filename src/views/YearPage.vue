@@ -6,6 +6,9 @@ import ProgressCard from '../components/ProgressCard.vue';
 import PostOpSection from '../components/PostOpSection.vue';
 import AccordionWithCheckboxes from '../components/AccordionWithCheckboxes.vue';
 import { useLocalStorage } from '../composables/useLocalStorage';
+import { useReveal } from '../composables/useReveal';
+
+useReveal();
 
 const props = defineProps<{ year: number }>();
 const router = useRouter();
@@ -44,7 +47,7 @@ const uniqueCategories = computed(() =>
         </button>
       </div>
 
-      <h1 class="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">
+      <h1 class="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white font-display">
         {{ year }}
       </h1>
 
@@ -53,8 +56,8 @@ const uniqueCategories = computed(() =>
         <p class="text-lg text-gray-500 dark:text-gray-400 mt-1">complete</p>
       </div>
 
-      <section class="mb-16" aria-labelledby="goals-heading">
-        <h2 id="goals-heading" class="text-3xl font-semibold text-center mb-8 text-gray-900 dark:text-white">
+      <section class="mb-16" aria-labelledby="goals-heading" data-reveal>
+        <h2 id="goals-heading" class="text-3xl font-semibold text-center mb-8 text-gray-900 dark:text-white font-display">
           {{ year }} Goals Progress
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -66,7 +69,7 @@ const uniqueCategories = computed(() =>
         </div>
       </section>
 
-      <section v-if="uniqueCategories.length > 0" class="min-h-[40vh]">
+      <section v-if="uniqueCategories.length > 0" class="min-h-[40vh]" data-reveal>
         <AccordionWithCheckboxes
           v-for="cat in uniqueCategories"
           :key="cat"

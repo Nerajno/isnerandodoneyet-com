@@ -6,6 +6,9 @@ import PostOpSection from "../components/PostOpSection.vue";
 import type { ProgressItemWithId, TimelineUpdate } from "../types";
 import { useLocalStorage } from "../composables/useLocalStorage";
 import AccordionWithCheckboxes from "../components/AccordionWithCheckboxes.vue";
+import { useReveal } from "../composables/useReveal";
+
+useReveal();
 
 const progressStore = useProgressStore();
 const { fetchProgressData, getYearData, calculateOverallProgress } = progressStore;
@@ -38,7 +41,7 @@ function getSectionItems(category: string) {
     class="outline-none"
   >
     <h1
-      class="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white"
+      class="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white font-display"
     >
       Is Nerando Done Yet?
     </h1>
@@ -53,10 +56,10 @@ function getSectionItems(category: string) {
       <p class="text-lg text-gray-500 dark:text-gray-400 mt-1">complete</p>
     </div>
 
-    <section class="mb-16 min-h-[70vh]" aria-labelledby="goals-heading">
+    <section class="mb-16 min-h-[70vh]" aria-labelledby="goals-heading" data-reveal>
       <h2
         id="goals-heading"
-        class="text-3xl font-semibold text-center mb-8 text-gray-900 dark:text-white"
+        class="text-3xl font-semibold text-center mb-8 text-gray-900 dark:text-white font-display"
       >
         {{ currentYear }} Goals Progress
       </h2>
@@ -68,7 +71,7 @@ function getSectionItems(category: string) {
         />
       </div>
     </section>
-    <section class="min-h-[70vh]">
+    <section class="min-h-[70vh]" data-reveal>
       <!-- New Sections for Projects, Talks, and Articles -->
       <AccordionWithCheckboxes
         id="projects"

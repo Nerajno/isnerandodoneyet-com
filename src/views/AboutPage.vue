@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useReveal } from '../composables/useReveal';
+
+useReveal();
 
 const videoFailed = ref(false);
 const videoSrc = '/videos/hero-bg.mp4';
@@ -52,7 +55,7 @@ const whyPoints: { title: string; body: string }[] = [
 
       <!-- Content -->
       <div class="relative z-10 max-w-3xl mx-auto px-6">
-        <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+        <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg font-display">
           Progress, Made Public.
         </h1>
         <p class="text-xl text-white max-w-2xl mx-auto leading-relaxed drop-shadow mb-8">
@@ -63,7 +66,7 @@ const whyPoints: { title: string; body: string }[] = [
           to="/current"
           class="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-colors shadow-lg"
         >
-          Current Year's Progress
+          View Current Progress
         </router-link>
       </div>
     </section>
@@ -75,9 +78,9 @@ const whyPoints: { title: string; body: string }[] = [
     <hr class="border-gray-200 dark:border-slate-700 mb-16" />
 
     <!-- The Problem -->
-    <section class="mb-16" aria-labelledby="problem-heading">
+    <section class="mb-16" aria-labelledby="problem-heading" data-reveal>
       <span class="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-2 block">The Problem</span>
-      <h2 id="problem-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+      <h2 id="problem-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4 font-display">
         Most goals don't survive February.
       </h2>
       <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
@@ -92,8 +95,8 @@ const whyPoints: { title: string; body: string }[] = [
     </section>
 
     <!-- What This Is -->
-    <section class="mb-16 bg-white dark:bg-slate-800 rounded-2xl p-10 shadow border border-gray-100 dark:border-slate-700" aria-labelledby="what-heading">
-      <h2 id="what-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+    <section class="mb-16 bg-white dark:bg-slate-800 rounded-2xl p-10 shadow border border-gray-100 dark:border-slate-700" aria-labelledby="what-heading" data-reveal>
+      <h2 id="what-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4 font-display">
         One question. One answer. Updated live.
       </h2>
       <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
@@ -119,8 +122,8 @@ const whyPoints: { title: string; body: string }[] = [
     </section>
 
     <!-- Why Public Accountability Works -->
-    <section class="mb-16" aria-labelledby="why-heading">
-      <h2 id="why-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+    <section class="mb-16" aria-labelledby="why-heading" data-reveal>
+      <h2 id="why-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4 font-display">
         Public commitments carry weight.
       </h2>
       <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
@@ -141,9 +144,9 @@ const whyPoints: { title: string; body: string }[] = [
     </section>
 
     <!-- Philosophy -->
-    <section class="mb-16 bg-gray-900 dark:bg-slate-950 rounded-2xl p-10 text-white" aria-labelledby="philosophy-heading">
+    <section class="mb-16 bg-gray-900 dark:bg-slate-950 rounded-2xl p-10 text-white" aria-labelledby="philosophy-heading" data-reveal>
       <span class="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-2 block">The Philosophy</span>
-      <h2 id="philosophy-heading" class="text-3xl font-bold mb-8">Three rules. No exceptions.</h2>
+      <h2 id="philosophy-heading" class="text-3xl font-bold mb-8 font-display">Three rules. No exceptions.</h2>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
         <div>
           <p class="text-4xl font-black text-blue-400 mb-2">01</p>
@@ -164,8 +167,8 @@ const whyPoints: { title: string; body: string }[] = [
     </section>
 
     <!-- The History -->
-    <section class="mb-16" aria-labelledby="history-heading">
-      <h2 id="history-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+    <section class="mb-16" aria-labelledby="history-heading" data-reveal>
+      <h2 id="history-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4 font-display">
         Seven years of shipping in public.
       </h2>
       <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-8 max-w-2xl">
@@ -224,9 +227,9 @@ const whyPoints: { title: string; body: string }[] = [
     </section>
 
     <!-- Resources & Boilerplate -->
-    <section class="mb-16 border-t border-gray-200 dark:border-slate-700 pt-16" aria-labelledby="resources-heading">
+    <section class="mb-16 border-t border-gray-200 dark:border-slate-700 pt-16" aria-labelledby="resources-heading" data-reveal>
       <span class="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-2 block">Resources</span>
-      <h2 id="resources-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+      <h2 id="resources-heading" class="text-3xl font-bold text-gray-900 dark:text-white mb-4 font-display">
         Build your own version.
       </h2>
       <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-10 max-w-2xl">
@@ -301,8 +304,8 @@ const whyPoints: { title: string; body: string }[] = [
     </section>
 
     <!-- CTA -->
-    <section class="text-center py-12" aria-labelledby="cta-heading">
-      <h2 id="cta-heading" class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+    <section class="text-center py-12" aria-labelledby="cta-heading" data-reveal>
+      <h2 id="cta-heading" class="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-display">
         See where things stand right now.
       </h2>
       <p class="text-gray-500 dark:text-gray-400 mb-8">

@@ -3,6 +3,7 @@ import { createPinia } from 'pinia';
 import App from './App.vue';
 import router from './router';
 import '@fontsource-variable/inter';
+import '@fontsource-variable/outfit';
 import './assets/main.css';
 import './style.css';
 import { useThemeStore } from './store/theme';

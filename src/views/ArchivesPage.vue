@@ -16,7 +16,7 @@ function progressFor(year: number) {
 
 <template>
   <main id="main-content" tabindex="-1" aria-label="Archives" class="outline-none">
-    <h1 class="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">
+    <h1 class="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white font-display">
       Archives
     </h1>
     <p class="text-center text-gray-600 dark:text-gray-400 mb-12">
