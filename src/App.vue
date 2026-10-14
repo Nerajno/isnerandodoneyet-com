@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppHeader from './components/layout/AppHeader.vue';
 import AppFooter from './components/layout/AppFooter.vue';
-import { useThemeStore } from './store/theme';
+import { useThemeStore } from './stores/theme';
 
 const theme = useThemeStore();
 theme.init();

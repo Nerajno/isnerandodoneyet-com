@@ -14,11 +14,11 @@ This codebase demonstrates patterns you'll use in real Vue apps:
 
 | Pattern | Where to Find It |
 |---|---|
-| Pinia state management | `src/store/progress.ts`, `src/store/theme.ts` |
+| Pinia state management | `src/stores/progress.ts`, `src/stores/theme.ts` |
 | Vue Router with lazy loading | `src/router/index.ts` |
 | Composables (reusable logic) | `src/composables/` |
 | TypeScript interfaces & types | `src/types/index.ts` |
-| Dark mode with Pinia + Tailwind CSS | `src/store/theme.ts`, `AppHeader.vue` |
+| Dark mode with Pinia + Tailwind CSS | `src/stores/theme.ts`, `AppHeader.vue` |
 | CSS design tokens (dark-first) | `src/style.css`, `tailwind.config.js` |
 | Reactive global provide/inject | `src/main.ts` — `categoryColors` computed |
 | Slot-based layout pattern | `src/components/layout/MainLayout.vue` |
@@ -85,32 +85,37 @@ src/
 ├── components/
 │   ├── layout/
 │   │   ├── AppHeader.vue       # Nav, dark mode toggle
-│   │   └── MainLayout.vue      # Page wrapper, transitions, skip link
+│   │   └── AppFooter.vue       # Site footer
 │   ├── AccordionWithCheckboxes.vue  # Expandable item lists
 │   ├── PostOpSection.vue       # Year-end reflections block
 │   ├── ProgressCard.vue        # Animated SVG progress ring
 │   └── ProgressBar.vue         # Linear progress bar
 ├── composables/
 │   ├── useLocalStorage.ts      # Read/write to localStorage
-│   └── useTheme.ts             # Dark mode composable (legacy)
+│   └── useReveal.ts            # Scroll-reveal animation trigger
+├── data/
+│   └── years.ts                # All goal data (initialYears)
 ├── router/
 │   └── index.ts                # All routes (lazy loaded)
-├── store/
-│   ├── progress.ts             # Pinia store — all goal data lives here
+├── stores/
+│   ├── progress.ts             # Pinia store — getters/actions over year data
 │   └── theme.ts                # Pinia store — dark/light mode, persisted to localStorage
 ├── types/
 │   └── index.ts                # Shared TypeScript interfaces
-└── views/
-    ├── AboutPage.vue           # Landing / philosophy page
-    ├── ArchivesPage.vue        # Year grid overview
-    ├── HomePage.vue            # Current year dashboard
-    ├── NotFoundPage.vue        # 404 page
-    └── YearPage.vue            # Per-year detail view
+├── views/
+│   ├── AboutPage.vue           # Landing / philosophy page
+│   ├── ArchivesPage.vue        # Year grid overview
+│   ├── CurrentYearPage.vue     # Current year dashboard
+│   ├── HistoryPage.vue         # Project history timeline
+│   ├── NotFoundPage.vue        # 404 page
+│   └── YearPage.vue            # Per-year detail view
+├── style.css                   # Tailwind import, theme tokens, global styles
+└── main.ts                     # App entry
 ```
 
 ## How to Add Your Own Data
 
-All goal data lives in `src/store/progress.ts` in the `initialYears` array. To track your own year:
+All goal data lives in `src/data/years.ts` in the `initialYears` array. To track your own year:
 
 1. Add a new entry to `initialYears` following the existing shape
 2. Populate `items` with your goal categories and totals
@@ -131,14 +136,14 @@ Each update entry looks like:
 ## Fork & Customize
 
 Want to track your own goals? Fork this repo and:
-1. Replace the data in `src/store/progress.ts` with your own
+1. Replace the data in `src/data/years.ts` with your own
 2. Update the site name/branding in `AppHeader.vue` and `index.html`
 3. Deploy to [Netlify](https://netlify.com), [Vercel](https://vercel.com), or [GitHub Pages](https://pages.github.com)
 
 ## Roadmap
 
 ### Content
-- [ ] Add 2026 goals and updates to `src/store/progress.ts` as the year progresses
+- [ ] Add 2026 goals and updates to `src/data/years.ts` as the year progresses
 - [ ] Add notes/recap to years that are missing them (2023, 2024)
 - [ ] Replace placeholder screenshot in README with an actual screenshot
 - [ ] Complete the boilerplate/fork section in `AboutPage.vue`
@@ -171,7 +176,7 @@ Want to track your own goals? Fork this repo and:
 
 **Medium (Level AA)**
 - [ ] `AccordionWithCheckboxes.vue` — Ensure checkbox touch targets are at least 24×24 CSS px; prefer 44×44 px (SC 2.5.8)
-- [ ] `HomePage.vue` — Extend `aria-live` coverage to accordion expand/collapse state changes (SC 4.1.3)
+- [ ] `CurrentYearPage.vue` — Extend `aria-live` coverage to accordion expand/collapse state changes (SC 4.1.3)
 - [ ] `YearPage.vue` — Add `aria-label` to back button to clarify its destination (SC 2.4.3)
 
 **Ongoing**

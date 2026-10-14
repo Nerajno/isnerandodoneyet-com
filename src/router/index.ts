@@ -1,7 +1,4 @@
 import { createRouter, createWebHistory, type RouteLocationNormalized } from 'vue-router';
-// Lazy load all views
-// import HomePage from '../views/HomePage.vue';
-// import NotFoundPage from '../views/NotFoundPage.vue';
 
 const routes = [
   {
@@ -12,7 +9,7 @@ const routes = [
   {
     path: '/current',
     name: 'CurrentYear',
-    component: () => import('../views/HomePage.vue'),
+    component: () => import('../views/CurrentYearPage.vue'),
   },
   {
     path: '/archives',

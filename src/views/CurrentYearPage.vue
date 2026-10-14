@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useProgressStore } from "../store/progress";
+import { useProgressStore } from "../stores/progress";
 import ProgressCard from "../components/ProgressCard.vue";
 import PostOpSection from "../components/PostOpSection.vue";
 import type { ProgressItemWithId, TimelineUpdate } from "../types";

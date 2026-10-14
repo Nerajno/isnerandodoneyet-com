@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { useProgressStore } from '../store/progress';
+import { useProgressStore } from '../stores/progress';
 import ProgressCard from '../components/ProgressCard.vue';
 import PostOpSection from '../components/PostOpSection.vue';
 import AccordionWithCheckboxes from '../components/AccordionWithCheckboxes.vue';
