@@ -8,6 +8,9 @@ export const initialYears: YearlyData[] = [
       { total: 10, completed: 0, title: 'Talks', category: 'Talks' },
       { total: 10, completed: 0, title: 'Projects', category: 'Projects' },
       { total: 10, completed: 0, title: 'Articles', category: 'Articles' },
+      // SPECIAL CONSIDERATION — tracked off-site for now; uncomment to show on the dashboard
+      // { total: 5, completed: 0, title: 'Mentorship', category: 'Mentorship' },
+      // { total: 5, completed: 0, title: 'Leadership', category: 'Leadership' },
     ],
     updates: [],
   },
