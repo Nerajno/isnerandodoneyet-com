@@ -31,5 +31,7 @@ node-compile-cache
 .goose
 .trae
 .windsurf
-.claude
-skills-lock.json
+# Track project skills only; keep local settings and impeccable's per-OS binary out
+.claude/*
+!.claude/skills/
+.claude/skills/impeccable/scripts/bin/
