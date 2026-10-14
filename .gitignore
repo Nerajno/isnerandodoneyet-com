@@ -24,3 +24,12 @@ dist-ssr
 *.sw?
 CLAUDE.md
 .env
+# Local tooling / caches
+node-compile-cache
+.remember
+.agents
+.goose
+.trae
+.windsurf
+.claude
+skills-lock.json
