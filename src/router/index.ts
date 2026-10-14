@@ -1,19 +1,25 @@
 import { createRouter, createWebHistory, type RouteLocationNormalized } from 'vue-router';
-// Lazy load all views
-// import HomePage from '../views/HomePage.vue';
-// import NotFoundPage from '../views/NotFoundPage.vue';
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import('../views/HomePage.vue'),
+    name: 'About',
+    component: () => import('../views/AboutPage.vue'),
+  },
+  {
+    path: '/current',
+    name: 'CurrentYear',
+    component: () => import('../views/CurrentYearPage.vue'),
   },
   {
     path: '/archives',
     name: 'Archives',
-    // Lazy-loaded component
-    component: () => import('../views/YearPage.vue'),
+    component: () => import('../views/ArchivesPage.vue'),
+  },
+  {
+    path: '/history',
+    name: 'History',
+    component: () => import('../views/HistoryPage.vue'),
   },
   {
     path: '/year/:year',

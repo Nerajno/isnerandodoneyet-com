@@ -1,21 +1,13 @@
 import { createApp } from 'vue';
+import { createPinia } from 'pinia';
 import App from './App.vue';
 import router from './router';
-import './assets/main.css';
-import { createPinia } from 'pinia';
-
-// Category colors for global injection
-const categoryColors = {
-  talks: '#3B82F6', // blue-500
-  projects: '#10B981', // emerald-500
-  articles: '#F59E0B', // amber-500
-};
+import '@fontsource-variable/inter';
+import '@fontsource-variable/outfit';
+import './style.css';
 
 const app = createApp(App);
-
-// Provide global values
-app.provide('categoryColors', categoryColors);
-
-app.use(router);
 app.use(createPinia());
+app.use(router);
+
 app.mount('#app');

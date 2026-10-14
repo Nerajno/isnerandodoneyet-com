@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 text-center">
       <p class="text-gray-600 dark:text-gray-400">
         © {{ new Date().getFullYear() }} IsNerandoDoneYet •
-        <a href="https://github.com/fimion/isnerandodoneyet-com" target="_blank" rel="noopener noreferrer"
+        <a href="https://github.com/Nerajno/isnerandodoneyet-com" target="_blank" rel="noopener noreferrer"
           class="text-blue-600 dark:text-blue-400 hover:underline">Project GitHub</a>
       </p>
       <p class="text-gray-600 dark:text-gray-400 flex flex-wrap justify-center gap-x-4 gap-y-2">

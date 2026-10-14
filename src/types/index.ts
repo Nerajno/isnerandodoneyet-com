@@ -103,6 +103,8 @@ export interface YearlyData {
   year: number;
   items: ProgressItem[];
   updates: TimelineUpdate[];
+  notes?: string;
+  recap?: string[];
 }
 
 export interface CategoryData {
@@ -205,11 +207,3 @@ export type CreateTalkActivity = NewActivity<TalkActivity>;
 export type CreateProjectActivity = NewActivity<ProjectActivity>;
 export type CreateArticleActivity = NewActivity<ArticleActivity>;
 
-// Basic Update interface for updateService usage
-export interface Update {
-  id: string;
-  date: string;
-  text: string;
-  category?: string;
-  [key: string]: any;
-}

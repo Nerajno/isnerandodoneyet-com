@@ -24,3 +24,14 @@ dist-ssr
 *.sw?
 CLAUDE.md
 .env
+# Local tooling / caches
+node-compile-cache
+.remember
+.agents
+.goose
+.trae
+.windsurf
+# Track project skills only; keep local settings and impeccable's per-OS binary out
+.claude/*
+!.claude/skills/
+.claude/skills/impeccable/scripts/bin/
